@@ -5,7 +5,7 @@ import torchvision.transforms.functional as F
 import random
 from PIL import Image
 
-
+# Die Class wurde zusammen mit ChatGPT erstellt.
 class SegmentationDataset(VisionDataset):
     def __init__(self, root, split='train', transform_mode='to_tensor'):
         super(SegmentationDataset, self).__init__(root)
