@@ -18,7 +18,6 @@ def validation_deeplab(dataloader, model, loss_fn, device):
 
             pred = model(X)['out']
             test_loss += loss_fn(pred, y).item()
-
             f1_value += f1_score(pred, y)
 
 
@@ -26,8 +25,8 @@ def validation_deeplab(dataloader, model, loss_fn, device):
     f1_value /= num_batches
 
     f1_value_background, f1_value_landslide = f1_value.tolist()
-
     return test_loss, f1_value_background, f1_value_landslide
+
 
 def validation_unet(dataloader, model, loss_fn, device):
     size = len(dataloader.dataset)
@@ -47,7 +46,6 @@ def validation_unet(dataloader, model, loss_fn, device):
 
             pred = model(X)
             test_loss += loss_fn(pred, y).item()
-
             f1_value += f1_score(pred, y)
 
 
@@ -55,5 +53,4 @@ def validation_unet(dataloader, model, loss_fn, device):
     f1_value /= num_batches
 
     f1_value_background, f1_value_landslide = f1_value.tolist()
-
     return test_loss, f1_value_background, f1_value_landslide

@@ -8,7 +8,6 @@ def test_deeplab(dataloader, model, loss_fn, device):
     test_loss, f1_value = 0, 0
 
     f1_score = MulticlassF1Score(num_classes=2, average='none').to(device)
-
     
     with torch.no_grad():
         for X, y in dataloader:
@@ -18,7 +17,6 @@ def test_deeplab(dataloader, model, loss_fn, device):
 
             pred = model(X)['out']
             test_loss += loss_fn(pred, y).item()
-
             f1_value += f1_score(pred, y)
 
 
@@ -26,9 +24,9 @@ def test_deeplab(dataloader, model, loss_fn, device):
     f1_value /= num_batches
 
     f1_value_background, f1_value_landslide = f1_value.tolist()
-
-
+    print("finished test")
     return test_loss, f1_value_background, f1_value_landslide
+
 
 def test_unet(dataloader, model, loss_fn, device):
     size = len(dataloader.dataset)
@@ -38,7 +36,6 @@ def test_unet(dataloader, model, loss_fn, device):
 
     f1_score = MulticlassF1Score(num_classes=2, average='none').to(device)
 
-    
     with torch.no_grad():
         for X, y in dataloader:
             X, y = X.to(device), y.to(device)
@@ -48,7 +45,6 @@ def test_unet(dataloader, model, loss_fn, device):
 
             pred = model(X)
             test_loss += loss_fn(pred, y).item()
-
             f1_value += f1_score(pred, y)
 
 
@@ -56,6 +52,4 @@ def test_unet(dataloader, model, loss_fn, device):
     f1_value /= num_batches
 
     f1_value_background, f1_value_landslide = f1_value.tolist()
-
-
     return test_loss, f1_value_background, f1_value_landslide
