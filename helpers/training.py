@@ -17,7 +17,6 @@ def train_deeplab(dataloader, model, loss_fn, optimizer, device):
 
         # Compute prediction error
         pred = model(X)['out']
-        print(pred)
         loss = loss_fn(pred, y)
         train_loss += loss_fn(pred, y).item()
 
@@ -93,7 +92,6 @@ def train_unet(dataloader, model, loss_fn, optimizer, device):
 
         # Compute prediction error
         pred = model(X)
-        print(pred)
         loss = loss_fn(pred, y)
         train_loss += loss_fn(pred, y).item()
 
