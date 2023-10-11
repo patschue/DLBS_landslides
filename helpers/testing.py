@@ -26,7 +26,6 @@ def test_deeplab(dataloader, model, loss_fn, device):
     f1_value /= num_batches
 
     f1_value_background, f1_value_landslide = f1_value.tolist()
-    print("finished test")
     return test_loss, f1_value_background, f1_value_landslide
 
 
