@@ -1,0 +1,1 @@
+Dieser Ordner ist in Git leer, wird aber für die Speicherung der Gewichte der Modelle benötigt. Nach dem Training jedes Modelles wird hier die entsprechende Gewichtung abgespeichert.
