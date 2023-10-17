@@ -32,11 +32,9 @@ class SegmentationDataset(VisionDataset):
 
     def transform_normalize(self, image, mask):
         to_tensor = transforms.ToTensor()
-        # Für die Normalisierung benötigen Sie die mittleren und std-Werte Ihrer Daten.
-        # Hier nehme ich an, dass Sie mit den Standardwerten für Imagenet arbeiten.
         normalize = transforms.Normalize(mean=[0,0,0], std=[1,1,1])
         image = normalize(to_tensor(image))
-        mask = to_tensor(mask)  # Masken normalisieren wir typischerweise nicht
+        mask = to_tensor(mask)
         return image, mask
 
     def transform_flip(self, image, mask):
@@ -50,6 +48,19 @@ class SegmentationDataset(VisionDataset):
         image = normalize(to_tensor(image))
         mask = to_tensor(mask)
         return image, mask
+    
+    def transform_color_jitter(self, image, mask):
+        color_jitter = transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.1)
+        image = color_jitter(image)
+
+        to_tensor = transforms.ToTensor()
+        normalize = transforms.Normalize(mean=[0,0,0], std=[1,1,1])
+
+        image = normalize(to_tensor(image))
+        mask = to_tensor(mask)
+
+        return image, mask
+
 
     def __getitem__(self, index):
         # Lade das Bild und die entsprechende Maske
@@ -65,7 +76,8 @@ class SegmentationDataset(VisionDataset):
             img, mask = self.transform_normalize(img, mask)
         elif self.transform_mode == 'flip':
             img, mask = self.transform_flip(img, mask)
-
+        elif self.transform_mode == 'color_jitter':
+            img, mask = self.transform_color_jitter(img, mask)
         return img, mask
 
     def __len__(self):
