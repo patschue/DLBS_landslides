@@ -10,7 +10,7 @@ class SegmentationDataset(VisionDataset):
     def __init__(self, root, split='train', transform_mode='to_tensor'):
         super(SegmentationDataset, self).__init__(root)
         
-        assert split in ['train', 'test', 'validation']
+        assert split in ['train', 'test', 'validation', 'cropped']
         self.split = split
         self.transform_mode = transform_mode
         
