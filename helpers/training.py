@@ -14,22 +14,16 @@ def train_binary(dataloader, model, loss_fn, optimizer, device):
     for batch, (X, y) in enumerate(dataloader):
         X, y = X.to(device), y.to(device)
         
-        # Ändern Sie das Label in float 
         y = y.float()
 
-
-        # Compute prediction error
         pred = model(X)['out']
         loss = loss_fn(pred, y)
         train_loss += loss.item()
 
-        # F1 Score für Landslide
         f1_score_landslide(torch.sigmoid(pred), y)
 
-        # F1 Score für den Hintergrund
         f1_score_background(1 - torch.sigmoid(pred), 1 - y)
 
-        # Backpropagation
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()

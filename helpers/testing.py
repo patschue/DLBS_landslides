@@ -16,16 +16,13 @@ def test_binary(dataloader, model, loss_fn, device):
         for X, y in dataloader:
             X, y = X.to(device), y.to(device)
 
-            # Ändern Sie das Label in float 
             y = y.float()
 
             pred = model(X)['out']
             test_loss += loss_fn(pred, y).item()
 
-            # F1 Score für Landslide
             f1_score_landslide(torch.sigmoid(pred), y)
 
-            # F1 Score für den Hintergrund
             f1_score_background(1 - torch.sigmoid(pred), 1 - y)
 
     test_loss /= num_batches
