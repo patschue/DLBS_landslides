@@ -1,5 +1,5 @@
 
-![Titelbild](https://github.com/patschue/DLBS_landslides/assets/84413011/e5cdb28d-6702-46e7-9588-e7b53e43527f)
+![Titelbild](https://github.com/patschue/Semantic-Segmentation-Landslides/assets/84413011/d6cf89fa-ded8-4f21-b26c-9556d8ec8a8a)
 
 # Deep Learning for Landslide Detection (DLBS)
 
